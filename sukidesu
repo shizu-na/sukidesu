@@ -1,0 +1,40 @@
+#!/bin/bash
+
+talk() {
+  local msg="$1"
+  for (( i=0; i<${#msg}; i++ )); do
+    printf "${msg:$i:1}"
+    sleep 0.1
+  done
+}
+
+think() {
+  local spin='/-\|'
+  echo -n " "
+  sleep 0.1
+  for i in {1..20}; do
+    printf "\r${spin:i%4:1} "
+    sleep 0.08
+  done
+  printf "\r  \r"
+}
+
+case "$1" in
+  -f|--force)
+    talk "ごめんなさい…"
+    sleep 0.3
+    echo ""
+    exit 1
+    ;;
+
+  *)
+    think
+    sleep 0.2
+    talk "…まずは、"
+    sleep 0.5
+    talk "ありがとう。"
+    sleep 0.3
+    echo ""
+    exit 1
+    ;;
+esac
